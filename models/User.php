@@ -296,9 +296,14 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
 
     public function getCatIds(){
         $result = [];
-        foreach ($this->groups as $one)
-            foreach ($one->cats as $cat)
+        if (!$this->canadmin) {
+            foreach ($this->groups as $one)
+                foreach ($one->cats as $cat)
+                    $result[] = $cat->id;
+        } else {
+            foreach (Category::find()->all() as $cat)
                 $result[] = $cat->id;
+        }
         return $result;
     }
 
