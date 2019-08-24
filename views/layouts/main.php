@@ -63,18 +63,28 @@ AppAsset::register($this);
             <div class="col-md-3">
                 <?php
                 if (!Yii::$app->user->isGuest) {
-                    if (Yii::$app->user->can('admin')) {
-                        $menuItems =  [
-                                ['label' => 'Меню администратора', 'options' => ['class' => 'header']],
-                                ['label' => 'Страницы', 'icon' => 'dashboard', 'url' => ['/apage']],
-                                ['label' => 'Группы', 'icon' => 'dashboard', 'url' => ['/group']],
-                                ['label' => 'Присовоение групп', 'icon' => 'dashboard', 'url' => ['/apage/assign']],
-                                ['label' => 'Пользователи', 'icon' => 'dashboard', 'url' => ['/user']],
-                        ];
-                    } else {
-                        $menuItems = Yii::$app->user->identity->menuItems;
-                    }
-
+                    $menuItems =  [
+                            ['label' => 'Личный кабинет ', 'options' => ['class' => 'header']],
+                            ['label' => 'Мой настройки', 'options' => ['class' => 'header']],
+                            ['label' => 'Админка', 'icon' => 'dashboard', 'url' => ['/apage'],
+                                'visible' => Yii::$app->user->can('admin'),
+                                'items'=>[
+                                        ['label' => 'Работа с PHP', 'icon' => 'dashboard', 'url' => ['/php'],
+                                            'items'=>[['label' => 'Создать php', 'icon' => 'dashboard', 'url' => ['/php/create'],]
+                                            ]
+                                        ],
+                                        ['label' => 'Работа с TXT', 'icon' => 'dashboard', 'url' => ['/apage'],
+                                            'items'=>[['label' => 'Создать TXT', 'icon' => 'dashboard', 'url' => ['/apage/create'],]
+                                            ]
+                                        ],
+                                        ['label' => 'Пользователи', 'icon' => 'dashboard', 'url' => ['/user']],
+                                        ['label' => 'Категории статей', 'icon' => 'dashboard', 'url' => ['/category']],
+                                        ['label' => 'Группы пользователей', 'icon' => 'dashboard', 'url' => ['/group']],
+                                        ['label' => 'Присовоение групп', 'icon' => 'dashboard', 'url' => ['/category/assign']],
+                            ]],
+                            ['label' => 'Все статьи', 'icon' => 'dashboard', 'url' => ['/page/alltext']],
+                            ['label' => 'Все страницы', 'icon' => 'dashboard', 'url' => ['/page/allphp']],
+                    ];
 
                     ?>
                     <?= \yii\widgets\Menu::widget(['items' => $menuItems,]);

@@ -78,17 +78,7 @@ class SiteController extends Controller
         if(Yii::$app->user->isGuest){
             return $this->actionLogin();
         }
-        if (Yii::$app->user->isGuest) {
-            $pages = [];
-            $groups = [];
-        }else {
-            $userModel = Yii::$app->user->identity;
-            $pages = $userModel->pages;
-
-            $MenuItems = $userModel->menuItems;
-
-        }
-        return $this->render('index', ['pages' => $pages, "MenuItems"=>$MenuItems]);
+        return $this->render('index');
     }
 
     /**

@@ -12,14 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'parid')->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput() ?>
+
+    <?= $form->field($model, 'parid')
+        ->dropDownList(
+            \yii\helpers\ArrayHelper::map($model->getOtherCats(), "id", "name"),
+            ['prompt'=>''])
+            ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

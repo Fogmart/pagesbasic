@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Завести нового', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,15 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'username',
-            'auth_key',
-//            'password_hash',
-//            'password_reset_token',
+            'lname',
+            'fname',
+            'mname',
+            'role',
             'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'verification_token',
-
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => []],
         ],

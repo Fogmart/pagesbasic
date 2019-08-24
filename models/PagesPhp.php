@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use http\Url;
 use Yii;
 
 /**
@@ -34,9 +35,9 @@ class PagesPhp extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
-            [['sort', 'whncrt', 'phpurl', 'url', 'catid'], 'integer'],
-            [['catid'], 'required'],
+            [['sort', 'whncrt', 'url', 'catid'], 'integer'],
             [['title'], 'string', 'max' => 250],
+            [['phpurl'], 'string', 'max' => 250],
         ];
     }
 
@@ -55,5 +56,9 @@ class PagesPhp extends \yii\db\ActiveRecord
             'url' => 'ЧПУ',
             'catid' => 'Категория',
         ];
+    }
+
+    public function getFullPhpUrl(){
+        return \yii\helpers\Url::home(true).$this->phpurl;
     }
 }

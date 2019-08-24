@@ -20,38 +20,63 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status' )
+    <?= $form->field($model, 'status')
         ->dropDownList(\app\models\User::USER_STATUSES) ?>
 
-    <label class="control-label" >Группы</label>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'fname')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'mname')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
+
+
+    <label class="control-label">Группы</label>
     <div class="row">
         <div class="col-md-6">
-    <table cellpadding="3" cellspacing="5" border="1" style="margin-bottom: 20px">
-        <tr>
-            <td>Название</td>
-            <td>Читать</td>
-            <td>Изменять</td>
-        </tr>
+            <table cellpadding="3" cellspacing="5" border="1" style="margin-bottom: 20px">
+                <tr>
+                    <td>Название</td>
+                    <td>Читать</td>
+                    <td>Редактировать</td>
+                    <td>Комментировать</td>
+                </tr>
 
-        <?php
-        $read = $model->getReadGroups();
-        $edit = $model->getEditGroups();
-        foreach ($groups as $group){?>
-            <tr>
-                <td><?=$group->name?></td>
-                <td><input type="checkbox" value="<?=$group->id?>" name="groups_read[]"
-                        <?php if (in_array($group->id,$read)) {
-                            echo "checked";
-                        }?>
-                    ></td>
-                <td><input type="checkbox" value="<?=$group->id?>" name="groups_edit[]"
-                        <?php if (in_array($group->id,$edit)) {
-                            echo "checked";
-                        }?>
-                    ></td>
-            </tr>
-        <?php } ?>
-    </table>
+                <?php
+                $read = $model->getReadGroups();
+                $edit = $model->getEditGroups();
+                $comment = $model->getCommentGroups();
+                foreach ($groups as $group) {
+                    ?>
+                    <tr>
+                        <td><?= $group->name ?></td>
+                        <td>
+                            <input type="checkbox" value="<?= $group->id ?>" name="groups_read[]"
+                                <?php if (in_array($group->id, $read)) {
+                                    echo "checked";
+                                } ?>
+                            ></td>
+                        <td>
+                            <input type="checkbox" value="<?= $group->id ?>" name="groups_edit[]"
+                                <?php if (in_array($group->id, $edit)) {
+                                    echo "checked";
+                                } ?>
+                            ></td>
+                        <td>
+                            <input type="checkbox" value="<?= $group->id ?>" name="groups_comment[]"
+                                <?php if (in_array($group->id, $comment)) {
+                                    echo "checked";
+                                } ?>
+                            ></td>
+                    </tr>
+                <?php } ?>
+            </table>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'canadmin')->checkbox() ?>

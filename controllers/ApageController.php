@@ -29,7 +29,7 @@ class ApageController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index','create','update', 'delete','assign','view', 'assigngroup'],
+                        'actions'=>['index','create','update', 'delete','view', 'assigngroup'],
                         'allow' => true,
 //                        'roles' => ['admin'],
                         'roles' => ['@'],
@@ -139,42 +139,14 @@ class ApageController extends Controller
     protected function findModel($id)
     {
         if (
-            ($model = Page::find()->with('groups')->andWhere(['id'=>$id])->one()) !== null) {
+            ($model = Page::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionDeleteImage(){
-        if (($model = ImageManager::findOne(Yii::$app->request->post('key'))) and $model->delete()){
-            return true;
-        } else {
-            throw new NotFoundHttpException('Не найдено');
-        }
-    }
 
 
 
-    public function actionAssign(){
-        $pages = Page::find()->all();
-        $groups = Group::find()->all();
-        return $this->render('asign', [
-            'pages'=>$pages, "groups"=>$groups
-        ]);
-    }
-
-    public function actionAssigngroup(){
-        $post = Yii::$app->request->post();
-
-        if ($post["set"]=='true'){
-            $model = new PageGroup();
-            $model->group_id = $post["groupid"];
-            $model->page_id = $post["pageid"];
-            $model->save();
-        } else {
-
-            PageGroup::deleteAll(["page_id"=>$post["pageid"], "group_id"=>$post["groupid"] ]);
-        }
-    }
 }

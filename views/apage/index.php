@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\PageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pages';
+$this->title = 'Тексты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Page', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,14 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             'title',
-            'text:ntext',
-            'url:url',
-            'whncrt',
-            'whnupd',
-            ['attribute'=>'groups', 'value'=>function($model){
-                $arr = \yii\helpers\ArrayHelper::map($model->groups, 'id', 'name');
-                return implode(',',$arr);
-            }],
+            [
+                'attribute' => 'text',
+                'value' => function ($model) {
+                    return \yii\helpers\StringHelper::truncate($model->text, 100);
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

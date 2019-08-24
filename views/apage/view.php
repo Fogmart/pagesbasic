@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Page */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Тексты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['page/alltext']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -15,30 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'text:ntext',
-            'url:url',
-        ],
-    ]) ?>
-
-    <?php if ($model->type_id == 1) { ?>
-        <iframe src="<?=$model->fullPhpUrl?>" name="mainframe" width="100%" height="1000px"> </iframe>
-    <?php }?>
+<div class="col-md-12">
+    <p><?=$model->text?></p>
+</div>
 
 
 

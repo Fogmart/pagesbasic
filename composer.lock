@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dcec1815cb586ee5f0b42a43cd4842a",
+    "content-hash": "290d9a0154a90500b5af9de827b1c8b3",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -161,6 +161,46 @@
                 "markdown-extra"
             ],
             "time": "2018-03-26T11:24:36+00:00"
+        },
+        {
+            "name": "creocoder/yii2-nested-sets",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creocoder/yii2-nested-sets.git",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creocoder/yii2-nested-sets/zipball/cb8635a459b6246e5a144f096b992dcc30cf9954",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "creocoder\\nestedsets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kochetov",
+                    "email": "creocoder@gmail.com"
+                }
+            ],
+            "description": "The nested sets behavior for the Yii framework",
+            "keywords": [
+                "nested sets",
+                "yii2"
+            ],
+            "time": "2015-01-27T10:53:51+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -623,6 +663,54 @@
             "description": "Select2 is a jQuery based replacement for select boxes.",
             "homepage": "https://select2.org/",
             "time": "2019-07-21T03:16:43+00:00"
+        },
+        {
+            "name": "slatiusa/yii2-nestable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ASlatius/yii2-nestable.git",
+                "reference": "7e40e678013b2fe6c96de99c29a1820fd92f0b8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ASlatius/yii2-nestable/zipball/7e40e678013b2fe6c96de99c29a1820fd92f0b8f",
+                "reference": "7e40e678013b2fe6c96de99c29a1820fd92f0b8f",
+                "shasum": ""
+            },
+            "require": {
+                "creocoder/yii2-nested-sets": "*",
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "slatiusa\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Arno Slatius",
+                    "email": "a.slatius@gmail.com"
+                }
+            ],
+            "description": "Yii 2.0 implementation of nested set behavior using jquery.nestable plugin.",
+            "homepage": "https://github.com/Hommer101/yii2-nestable",
+            "keywords": [
+                "Behavior",
+                "extension",
+                "jquery",
+                "nestable",
+                "nested set",
+                "sortable",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-10-08T12:21:47+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4145,7 +4233,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-select2": 20
+        "kartik-v/yii2-widget-select2": 20,
+        "slatiusa/yii2-nestable": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -28,7 +28,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parid', 'name', 'sort'], 'integer'],
+            [['parid', 'sort'], 'integer'],
+            [['name'], 'string', 'max' => 50],
             [['name'], 'required'],
         ];
     }
@@ -40,9 +41,58 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parid' => 'Parid',
-            'name' => 'Name',
-            'sort' => 'Sort',
+            'parid' => 'Уровень выше',
+            'name' => 'Название',
+            'sort' => 'Порядок сортировки',
         ];
     }
+
+    public function getOtherCats(){
+        if (isset($this->id)) {
+            return Category::find()->where('id != '.$this->id)->all();
+        } else {
+            return Category::find()->all();
+        }
+    }
+
+    public function children(){
+        return Category::find()->where('parid = '.$this->id);
+    }
+
+    public function getChild(){
+        return Category::find()->where('parid = '.$this->id)->all();
+    }
+
+    public function isRoot(){
+        return $this->parid==null;
+    }
+    public function isChildOf($node1){
+        return $this->parid == $node1->id;
+    }
+
+    public static function getMain(){
+        return Category::find()->where('parid is null')->all();
+    }
+
+
+    public function getPages(){
+        return $this->hasMany(Page::className(), ['catid'=>'id']);
+    }
+
+    public function getPagesPhp(){
+        return $this->hasMany(PagesPhp::className(), ['catid'=>'id']);
+    }
+
+    public function getGroupids(){
+        return $this->hasMany(Group_cat::className(), ['catid'=>'id']);
+    }
+
+    public function getGroupIdsArray(){
+        $res = [];
+        foreach ($this->groupids as $one){
+            $res[] = $one->groupid;
+        }
+        return $res;
+    }
+
 }

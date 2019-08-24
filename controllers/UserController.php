@@ -83,7 +83,8 @@ class UserController extends Controller
             $post = Yii::$app->request->post();
             $groups_read = isset($post["groups_read"])?$post["groups_read"]:[];
             $groups_edit = isset($post["groups_edit"])?$post["groups_edit"]:[];
-            $model->saveGroups($groups_read, $groups_edit);
+            $groups_comment = isset($post["groups_comment"])?$post["groups_comment"]:[];
+            $model->saveGroups($groups_read, $groups_edit, $groups_comment);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -109,7 +110,8 @@ class UserController extends Controller
             $post = Yii::$app->request->post();
             $groups_read = isset($post["groups_read"])?$post["groups_read"]:[];
             $groups_edit = isset($post["groups_edit"])?$post["groups_edit"]:[];
-            $model->saveGroups($groups_read, $groups_edit);
+            $groups_comment = isset($post["groups_comment"])?$post["groups_comment"]:[];
+            $model->saveGroups($groups_read, $groups_edit,$groups_comment);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

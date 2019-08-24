@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\PagesPhpSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pages Phps';
+$this->title = 'Страницы PHP';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-php-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Pages Php', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'text:ntext',
-            'sort',
             'whncrt',
             //'phpurl',
             //'url:url',

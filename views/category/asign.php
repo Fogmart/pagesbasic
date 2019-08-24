@@ -10,19 +10,19 @@
 <table cellpadding="3" cellspacing="5" border="1">
     <tr>
         <td></td>
-        <?php foreach ($groups as $group){?>
-            <td><?=$group->name?></td>
+        <?php foreach ($cats as $cat){?>
+            <td><?=$cat->name?></td>
         <?php } ?>
     </tr>
-    <?php foreach ($pages as $page){?>
-        <tr pg="<?=$page->id?>" >
-            <td><?=$page->title?></td>
+    <?php foreach ($groups as $group){?>
+        <tr gr="<?=$group->id?>" >
+            <td><?=$group->name?></td>
             <?php
 
-            foreach ($groups as $group){?>
+            foreach ($cats as $cat){?>
                 <td>
-                    <input type="checkbox" gr="<?=$group->id?>"
-                        <?php if (in_array($group, $page->groups)) {
+                    <input type="checkbox" cat="<?=$cat->id?>"
+                        <?php if (in_array($group->id, $cat->groupIdsArray)) {
                             echo "checked";
                         }?>
                             onclick="toggleGroup(this)"
@@ -37,7 +37,7 @@
 <script>
     function toggleGroup(cb) {
         var tr = $(cb).parents("tr")
-        $.post("/apage/assigngroup",{"pageid":$(tr).attr("pg"),"groupid": $(cb).attr("gr"),"set": $(cb).prop("checked")})
+        $.post("/category/assigngroup",{"groupid":$(tr).attr("gr"),"catid": $(cb).attr("cat"),"set": $(cb).prop("checked")})
     }
 </script>
 

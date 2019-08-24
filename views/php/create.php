@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\PagesPhp */
 
-$this->title = 'Create Pages Php';
-$this->params['breadcrumbs'][] = ['label' => 'Pages Phps', 'url' => ['index']];
+$this->title = 'Создание страницы PHP';
+$this->params['breadcrumbs'][] = ['label' => 'Страницы PHP', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-php-create">

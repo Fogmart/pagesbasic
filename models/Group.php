@@ -29,7 +29,6 @@ class Group extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 50],
-            [['parid'], 'integer'],
         ];
     }
 
@@ -41,34 +40,18 @@ class Group extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'parid' => 'Верхняя группа',
         ];
     }
 
-
-    public function getPageGroup(){
-        return $this->hasMany(PageGroup::className(), ['group_id'=>'id']);
+    public function getCatids(){
+        return $this->hasMany(Group_cat::className(), ['groupid'=>'id']);
     }
 
-    public function getPages(){
-        return $this->hasMany(Page::className(), ['id'=>'page_id'])->via('pageGroup');
+    public function getCats(){
+        return $this->hasMany(Category::className(), ['id' => 'catid'])->via('catids');
     }
 
-    public function getOtherGroups(){
-        if (isset($this->id)) {
-            return Group::find()->where('id != '.$this->id)->all();
-        } else {
-            return Group::find()->all();
-        }
-    }
 
-    public function getChild(){
-        return Group::find()->where('parid = '.$this->id)->all();
-    }
-
-    public function getMainGroups(){
-        return Group::find()->where('parid is null')->all();
-    }
 
 
 

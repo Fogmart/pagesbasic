@@ -29,7 +29,7 @@ class UserProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'mname', 'role'], 'required'],
+            [['user_id', 'lname', 'fname'], 'required'],
             [['user_id'], 'integer'],
             [['lname', 'fname', 'mname'], 'string', 'max' => 30],
             [['role'], 'string', 'max' => 50],
@@ -43,10 +43,10 @@ class UserProfile extends \yii\db\ActiveRecord
     {
         return [
             'user_id' => 'User ID',
-            'lname' => 'Lname',
-            'fname' => 'Fname',
-            'mname' => 'Mname',
-            'role' => 'Role',
+            'lname' => 'Фамилия',
+            'fname' => 'Имя',
+            'mname' => 'Отчество',
+            'role' => 'Должность',
         ];
     }
 }

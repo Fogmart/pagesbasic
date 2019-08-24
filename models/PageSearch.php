@@ -46,6 +46,11 @@ class PageSearch extends Page
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 100
+            ]
         ]);
 
         $this->load($params);

@@ -57,6 +57,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/<id:\d+>' => 'apage/view',
+                'php/<id:\d+>' => 'php/view',
             ],
         ],
     ],

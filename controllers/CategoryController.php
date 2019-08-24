@@ -2,12 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\Group;
+use app\models\Group_cat;
+use app\models\Page;
+use app\models\PageGroup;
 use Yii;
 use app\models\Category;
 use app\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use slatiusa\nestable\Nestable;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -17,6 +22,16 @@ class CategoryController extends Controller
     /**
      * {@inheritdoc}
      */
+
+    public function actions() {
+        return [
+            'nodeMove' => [
+                'class' => 'app\actions\CatMoveAction',
+                'modelName' => Category::className(),
+            ],
+        ];
+    }
+
     public function behaviors()
     {
         return [
@@ -35,12 +50,10 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $all = Category::getMain();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'all' => $all,
         ]);
     }
 
@@ -124,4 +137,26 @@ class CategoryController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionAssign(){
+        $cats = Category::find()->all();
+        $groups = Group::find()->all();
+        return $this->render('asign', [
+            'cats'=>$cats, "groups"=>$groups
+        ]);
+    }
+
+    public function actionAssigngroup(){
+        $post = Yii::$app->request->post();
+
+        if ($post["set"]=='true'){
+            $model = new Group_cat();
+            $model->groupid = $post["groupid"];
+            $model->catid = $post["catid"];
+            $model->save();
+        } else {
+            Group_cat::deleteAll(["catid"=>$post["catid"], "groupid"=>$post["groupid"] ]);
+        }
+    }
+
 }

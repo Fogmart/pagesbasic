@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Group;
 use app\models\Page;
 use app\models\User;
@@ -68,6 +69,19 @@ class  PageController extends Controller
             throw new NotFoundHttpException();
         }
     }
+
+    public function actionAlltext(){
+        $cats = Category::getMain();
+        $types = ['text'];
+        return $this->render('all', ['cats'=>$cats, 'types'=>$types]);
+    }
+
+    public function actionAllphp(){
+        $cats = Category::getMain();
+        $types = ['php'];
+        return $this->render('all', ['cats'=>$cats, 'types'=>$types]);
+    }
+
 
 }
 
