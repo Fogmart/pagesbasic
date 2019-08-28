@@ -29,7 +29,7 @@ class ApageController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index','create','update', 'delete','view', 'assigngroup'],
+                        'actions'=>['index','create','update', 'delete','view', 'assigngroup','edtcat'],
                         'allow' => true,
 //                        'roles' => ['admin'],
                         'roles' => ['@'],
@@ -146,7 +146,14 @@ class ApageController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    public function actionEdtcat($catid){
+        $pagelst = Page::byCategory($catid);
 
+        return $this->render('edtcat.php', [
+            'pagelst' => $pagelst,
+        ]);
+
+    }
 
 
 }

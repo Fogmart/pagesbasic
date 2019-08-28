@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Page;
+use app\models\PagesPhp;
 use app\models\ResendVerificationEmailForm;
 use app\models\VerifyEmailForm;
 use Yii;
@@ -89,6 +90,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
+//            if (isset(Yii::$app->user->identity->homegage))
             return $this->goHome();
         }
 

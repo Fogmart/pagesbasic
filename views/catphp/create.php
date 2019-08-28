@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Page */
+/* @var $model app\models\CategoriesPhp */
 
-$this->title = 'Добавление статьи';
-$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['page/alltext']];
+$this->title = 'Create Categories Php';
+$this->params['breadcrumbs'][] = ['label' => 'Categories Phps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="page-create">
+<div class="categories-php-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

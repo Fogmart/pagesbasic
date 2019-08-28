@@ -75,6 +75,7 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
             [['groups_edit'], 'safe'],
             [['groups_comment'], 'safe'],
             [['canadmin'], 'safe'],
+            [['homepageid'], 'safe'],
         ];
     }
 
@@ -87,7 +88,8 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
             'lname' => 'Фамилия',
             'fname' => 'Имя',
             'mname' => 'Отчество',
-            'role' => 'Должность',
+            'role' => 'Должность и судно',
+            'homepageid' => 'Домашняя страница',
         ];
     }
 
@@ -306,6 +308,18 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
         }
         return $result;
     }
+    public function getCatphpIds(){
+        $result = [];
+        if (!$this->canadmin) {
+            foreach ($this->groups as $one)
+                foreach ($one->catsphp as $cat)
+                    $result[] = $cat->id;
+        } else {
+            foreach (CategoriesPhp::find()->all() as $cat)
+                $result[] = $cat->id;
+        }
+        return $result;
+    }
 
 
     public function getIsUserGroup($group_id)
@@ -404,6 +418,17 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
         return $res;
     }
 
+    public function getEditCats()
+    {
+        $res = [];
+
+        foreach ($this->groups as $gr) {
+            $res = array_merge($gr->catsEditIds, $res);
+        }
+        return $res;
+    }
+
+
     public function getCommentGroups()
     {
         $res = [];
@@ -433,6 +458,8 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
         return $this->username;
     }
 
-
+    public function getHomePage(){
+        return $this->homepageid;
+    }
 
 }

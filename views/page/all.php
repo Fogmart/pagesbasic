@@ -1,19 +1,27 @@
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <?php
 
 /*@var $cats app\models\Category*/
 
 use yii\helpers\Html;
 $user = Yii::$app->user->identity;
+global $ucatIds, $EditCats;
 $ucatIds = $user->catIds;
-function renderlist($cat, $types, $ucatIds){
+$EditCats = $user->editCats;
 
+
+function renderlist($cat, $types){
+    global $ucatIds, $EditCats;
     if (in_array($cat->id, $ucatIds)) {
 
         echo "<li>" . $cat->name;
+        if (in_array($cat->id, $EditCats)) echo "   ".Html::a("<i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>
+", ['/page/create/'.$cat->id]);
         if (isset($cat->child)) {
             echo "<ul>";
             foreach ($cat->child as $ch) {
-                renderlist($ch, $types, $ucatIds);
+                renderlist($ch, $types);
             }
             echo "</ul>";
         }
@@ -38,7 +46,7 @@ function renderlist($cat, $types, $ucatIds){
         echo "</li>";
     } else {
         foreach ($cat->child as $ch) {
-            renderlist($ch, $types, $ucatIds);
+            renderlist($ch, $types);
         }
     }
 }
@@ -50,7 +58,7 @@ function renderlist($cat, $types, $ucatIds){
             <ul>
             <?php
             foreach ($cats as $cat){
-                renderlist($cat, $types, $ucatIds);
+                renderlist($cat, $types);
             } ?>
             </ul>
         </div>

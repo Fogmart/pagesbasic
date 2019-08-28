@@ -36,6 +36,10 @@ use yii\widgets\ActiveForm;
     </div>
     <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'homepageid')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\app\models\PagesPhp::find()->all(), "id", "title"), ['prompt'=>'']
+    ) ?>
+
 
     <label class="control-label">Группы</label>
     <div class="row">
@@ -43,9 +47,7 @@ use yii\widgets\ActiveForm;
             <table cellpadding="3" cellspacing="5" border="1" style="margin-bottom: 20px">
                 <tr>
                     <td>Название</td>
-                    <td>Читать</td>
-                    <td>Редактировать</td>
-                    <td>Комментировать</td>
+                    <td>Право</td>
                 </tr>
 
                 <?php
@@ -62,18 +64,6 @@ use yii\widgets\ActiveForm;
                                     echo "checked";
                                 } ?>
                             ></td>
-                        <td>
-                            <input type="checkbox" value="<?= $group->id ?>" name="groups_edit[]"
-                                <?php if (in_array($group->id, $edit)) {
-                                    echo "checked";
-                                } ?>
-                            ></td>
-                        <td>
-                            <input type="checkbox" value="<?= $group->id ?>" name="groups_comment[]"
-                                <?php if (in_array($group->id, $comment)) {
-                                    echo "checked";
-                                } ?>
-                            ></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -84,7 +74,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

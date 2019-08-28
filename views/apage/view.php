@@ -7,7 +7,6 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Page */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Тексты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['page/alltext']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -17,8 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
 
-<div class="col-md-12">
+<div class="col-md-11">
     <p><?=$model->text?></p>
+</div>
+<div class="col-md-1">
+    <?= \yii\bootstrap\Html::a('Изменить',
+        ['page/update', 'id' => $model->id],
+        ['class' => 'btn btn-success']) ?>
 </div>
 
 

@@ -65,8 +65,8 @@ AppAsset::register($this);
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [
                             ['label' => 'Личный кабинет ', 'options' => ['class' => 'header']],
-                            ['label' => 'Мой настройки', 'options' => ['class' => 'header']],
-                            ['label' => 'Админка', 'icon' => 'dashboard', 'url' => ['/apage'],
+                            ['label' => 'Мой настройки', 'icon' => 'dashboard', 'url' => ['/user/usredt']],
+                            ['label' => 'Админка', 'options' => ['class' => 'header'],
                                 'visible' => Yii::$app->user->can('admin'),
                                 'items'=>[
                                         ['label' => 'Работа с PHP', 'icon' => 'dashboard', 'url' => ['/php'],
@@ -79,11 +79,12 @@ AppAsset::register($this);
                                         ],
                                         ['label' => 'Пользователи', 'icon' => 'dashboard', 'url' => ['/user']],
                                         ['label' => 'Категории статей', 'icon' => 'dashboard', 'url' => ['/category']],
+                                        ['label' => 'Категории страниц', 'icon' => 'dashboard', 'url' => ['/catphp']],
                                         ['label' => 'Группы пользователей', 'icon' => 'dashboard', 'url' => ['/group']],
                                         ['label' => 'Присовоение групп', 'icon' => 'dashboard', 'url' => ['/category/assign']],
                             ]],
                             ['label' => 'Все статьи', 'icon' => 'dashboard', 'url' => ['/page/alltext']],
-                            ['label' => 'Все страницы', 'icon' => 'dashboard', 'url' => ['/page/allphp']],
+                            ['label' => 'Все страницы', 'icon' => 'dashboard', 'url' => ['/php/allphp']],
                     ];
 
                     ?>

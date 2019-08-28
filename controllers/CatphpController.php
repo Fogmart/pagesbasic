@@ -2,23 +2,19 @@
 
 namespace app\controllers;
 
-use app\models\CategoriesPhp;
-use app\models\Group;
-use app\models\Group_cat;
-use app\models\Page;
-use app\models\PageGroup;
-use Yii;
 use app\models\Category;
-use app\models\CategorySearch;
+use app\models\Group_CatPhp;
+use Yii;
+use app\models\CategoriesPhp;
+use app\models\CategoriesPhpSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use slatiusa\nestable\Nestable;
 
 /**
- * CategoryController implements the CRUD actions for Category model.
+ * CatphpController implements the CRUD actions for CategoriesPhp model.
  */
-class CategoryController extends Controller
+class CatphpController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -28,7 +24,7 @@ class CategoryController extends Controller
         return [
             'nodeMove' => [
                 'class' => 'app\actions\CatMoveAction',
-                'modelName' => Category::className(),
+                'modelName' => CategoriesPhp::className(),
             ],
         ];
     }
@@ -46,20 +42,22 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
+     * Lists all CategoriesPhp models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $all = Category::getMain();
+        $searchModel = new CategoriesPhpSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'all' => $all,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Category model.
+     * Displays a single CategoriesPhp model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -72,13 +70,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new CategoriesPhp model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new CategoriesPhp();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +88,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing CategoriesPhp model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +108,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing CategoriesPhp model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,51 +122,33 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the CategoriesPhp model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Category the loaded model
+     * @return CategoriesPhp the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = CategoriesPhp::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionAssign(){
-        $cats = Category::find()->all();
-        $catsphp = CategoriesPhp::find()->all();
-        $groups = Group::find()->all();
-        return $this->render('asign', [
-            'cats'=>$cats, "catsphp"=> $catsphp , "groups"=>$groups
-        ]);
-    }
 
     public function actionAssigngroup(){
         $post = Yii::$app->request->post();
-        $val =  ($post["set"]=='true')?1:0;
-        $model = Group_cat::find()->where(["catid"=>$post["catid"], "groupid"=>$post["groupid"] ])->one();
 
-        if ((!$model) && ($val==1)){
-            $model = new Group_cat();
+        if ($post["set"]=='true'){
+            $model = new Group_CatPhp();
             $model->groupid = $post["groupid"];
             $model->catid = $post["catid"];
+            $model->save();
+        } else {
+            Group_CatPhp::deleteAll(["catid"=>$post["catid"], "groupid"=>$post["groupid"] ]);
         }
-
-        if ($model){}
-        if ($post["act"] == 'read') $model->can_read = $val;
-        if ($post["act"] == 'edit') $model->can_edit = $val;
-        if ($post["act"] == 'comment') $model->can_comment = $val;
-
-        if (($model->can_read == 0) && ($model->can_edit == 0) && ($model->can_comment == 0)) {
-            $model->delete();
-            return;
-        }
-        $model->save();
     }
 
 }

@@ -18,36 +18,31 @@ class  PageController extends Controller
 {
 
 
-    public function actionCreate($groupid)
+    public function actionCreate($catid)
     {
         $model = new Page();
-        $model->groups_arr = [$groupid];
-        $model->type_id = 0;
-
+        $model->catid = $catid;
+        print_r(Yii::$app->request->post());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            return $this->redirect(['view', 'id' => $model->id, "groupid"=>$groupid]);
+            return $this->redirect('/page/'.$model->id);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'groupid'=>$groupid
         ]);
     }
 
-    public function actionUpdate($id, $groupid)
+    public function actionUpdate($id)
     {
         $model = Page::find()->andWhere(['id'=>$id])->one();
 
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $post = Yii::$app->request->post();
-            return $this->redirect(['bygroup', 'groupid' => $groupid]);
+            return $this->redirect('/page/'.$model->id);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'groupid' => $groupid,
         ]);
     }
 
@@ -76,11 +71,7 @@ class  PageController extends Controller
         return $this->render('all', ['cats'=>$cats, 'types'=>$types]);
     }
 
-    public function actionAllphp(){
-        $cats = Category::getMain();
-        $types = ['php'];
-        return $this->render('all', ['cats'=>$cats, 'types'=>$types]);
-    }
+
 
 
 }

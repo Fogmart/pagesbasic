@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Page */
 
-$this->title = 'Update Page: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['one', 'url' => $model->url, "groupid"=>$groupid]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Редактирование: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['page/alltext']];
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="page-update">
 
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'groupid' => $groupid,
     ]) ?>
 
 

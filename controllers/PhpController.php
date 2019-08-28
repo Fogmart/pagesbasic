@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\CategoriesPhp;
+use app\models\Category;
 use Yii;
 use app\models\PagesPhp;
 use app\models\PagesPhpSearch;
@@ -124,4 +126,10 @@ class PhpController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionAllphp(){
+        $cats = CategoriesPhp::getMain();
+        return $this->render('all', ['cats'=>$cats, ]);
+    }
+
 }

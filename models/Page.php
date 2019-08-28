@@ -58,7 +58,7 @@ class Page extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'url'], 'required'],
+            [['title'], 'required'],
             [['text'], 'string'],
             [['catid'], 'integer'],
             [['sort'], 'integer', 'max' => 99, 'min'=>1],
@@ -91,6 +91,10 @@ class Page extends ActiveRecord
 
     public function getCategory(){
         return $this->hasOne(Category::className(), ['id'=>'catid']);
+    }
+
+    static public function byCategory($catid){
+        return Page::find()->where(["catid"=>$catid])->all();
     }
 
 }

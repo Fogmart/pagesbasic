@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'catid')->dropDownList(
-        \yii\helpers\ArrayHelper::map(\app\models\Category::find()->all(), "id", "name"), ['prompt'=>'']
+        \yii\helpers\ArrayHelper::map(\app\models\CategoriesPhp::find()->all(), "id", "name"), ['prompt'=>'']
     ) ?>
 
     <div class="form-group">

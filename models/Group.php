@@ -51,6 +51,49 @@ class Group extends \yii\db\ActiveRecord
         return $this->hasMany(Category::className(), ['id' => 'catid'])->via('catids');
     }
 
+    public function getCatphpids(){
+        return $this->hasMany(Group_CatPhp::className(), ['groupid'=>'id']);
+    }
+
+    public function getCatsphp(){
+        return $this->hasMany(CategoriesPhp::className(), ['id' => 'catid'])->via('catphpids');
+    }
+
+    public function getCatphpReadids(){
+        $res = [];
+        foreach ($this->catphpids as $id){
+            $res[] = $id->catid;
+        }
+        return $res;
+    }
+
+
+    public function getCatsReadIds(){
+        $res = [];
+        foreach ($this->catids as $id){
+            if ($id->can_read) $res[] = $id->catid;
+        }
+        return $res;
+    }
+
+    public function getCatsEditIds(){
+        $res = [];
+        foreach ($this->catids as $id){
+            if ($id->can_edit) $res[] = $id->catid;
+        }
+        return $res;
+    }
+
+    public function getCatsCommentIds(){
+        $res = [];
+        foreach ($this->catids as $id){
+            if ($id->can_comment) $res[] = $id->catid;
+        }
+        return $res;
+    }
+
+
+
 
 
 

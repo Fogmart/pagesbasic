@@ -5,21 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "categories_php".
  *
  * @property int $id
  * @property int $parid
- * @property int $name
- * @property int $sort
+ * @property string $name
  */
-class Category extends \yii\db\ActiveRecord
+class CategoriesPhp extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'categories_php';
     }
 
     /**
@@ -28,9 +27,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parid', 'sort'], 'integer'],
-            [['name'], 'string', 'max' => 100],
             [['name'], 'required'],
+            [['parid'], 'integer'],
+            [['name'], 'string', 'max' => 100],
         ];
     }
 
@@ -43,24 +42,23 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'parid' => 'Уровень выше',
             'name' => 'Название',
-            'sort' => 'Порядок сортировки',
         ];
     }
 
     public function getOtherCats(){
         if (isset($this->id)) {
-            return Category::find()->where('id != '.$this->id)->all();
+            return CategoriesPhp::find()->where('id != '.$this->id)->all();
         } else {
-            return Category::find()->all();
+            return CategoriesPhp::find()->all();
         }
     }
 
     public function children(){
-        return Category::find()->where('parid = '.$this->id);
+        return CategoriesPhp::find()->where('parid = '.$this->id);
     }
 
     public function getChild(){
-        return Category::find()->where('parid = '.$this->id)->all();
+        return CategoriesPhp::find()->where('parid = '.$this->id)->all();
     }
 
     public function isRoot(){
@@ -71,7 +69,7 @@ class Category extends \yii\db\ActiveRecord
     }
 
     public static function getMain(){
-        return Category::find()->where('parid is null')->all();
+        return CategoriesPhp::find()->where('parid is null')->all();
     }
 
 
@@ -84,7 +82,7 @@ class Category extends \yii\db\ActiveRecord
     }
 
     public function getGroupids(){
-        return $this->hasMany(Group_cat::className(), ['catid'=>'id']);
+        return $this->hasMany(Group_CatPhp::className(), ['catid'=>'id']);
     }
 
     public function getGroupIdsArray(){

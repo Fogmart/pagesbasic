@@ -29,6 +29,11 @@ class UserController extends Controller
                         'actions'=>['index','create','update', 'delete','view'],
                         'allow' => true,
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'actions'=>['usredt'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ]
                 ]
             ],
@@ -149,6 +154,21 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionUsredt(){
+
+        $model = Yii::$app->user->identity;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('usredt', [
+            'model' => $model,
+        ]);
+
+
     }
 
 
