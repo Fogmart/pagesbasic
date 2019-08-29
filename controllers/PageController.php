@@ -22,9 +22,11 @@ class  PageController extends Controller
     {
         $model = new Page();
         $model->catid = $catid;
-        print_r(Yii::$app->request->post());
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+
+        print_r(Yii::$app->request->post());
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('/page/'.$model->id);
         }
 

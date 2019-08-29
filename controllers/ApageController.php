@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Group;
 use app\models\ImageManager;
 use app\models\PageGroup;
@@ -98,6 +99,7 @@ class ApageController extends Controller
     public function actionCreate()
     {
         $model = new Page();
+        $model->catid = Category::defCat()->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -40,7 +40,8 @@ use vova07\imperavi\Widget;
         ?>
 
     <?= $form->field($model, 'catid')->dropDownList(
-            \yii\helpers\ArrayHelper::map(\app\models\Category::find()->all(), "id", "name"), ['prompt'=>'']
+            \yii\helpers\ArrayHelper::map(\app\models\Category::find()->all(), "id", "name"),
+            [\app\models\Category::defCat()->id=>\app\models\Category::defCat()->name]
     ) ?>
 
     <div class="form-group">

@@ -55,7 +55,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         $.each($(".dd3-content"), function (i,e) {
             var id = $(this).closest('.dd-item').attr("data-id")
-            $(this).append(
+            $(this)
+                .append( '('+id+')')
+                .append(
                 $("<a>")
                     .attr("href", "/category/update?id="+id)
                     .html("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n")

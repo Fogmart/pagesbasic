@@ -95,4 +95,9 @@ class Category extends \yii\db\ActiveRecord
         return $res;
     }
 
+    public static function defCat(){
+        $basecat = Options::findOne(1)->basecat;
+        return Category::find()->where(["id"=> $basecat])->one();
+    }
+
 }
