@@ -89,13 +89,17 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
         if (!Yii::$app->user->isGuest) {
-//            if (isset(Yii::$app->user->identity->homegage))
-            return $this->goHome();
+
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (isset(Yii::$app->user->identity->homepage)){
+                header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
+                return;
+            }
 
             return $this->goBack();
         } else {

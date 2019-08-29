@@ -58,13 +58,13 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="container-fluid">
+        <div class="row" style="padding-top: 5%">
+            <div class="col-md-2" >
                 <?php
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [
-                            ['label' => 'Личный кабинет ', 'options' => ['class' => 'header']],
+                            ['label' => 'Личный кабинет', 'icon' => 'dashboard', 'url' => ['/user/home']],
                             ['label' => 'Мой настройки', 'icon' => 'dashboard', 'url' => ['/user/usredt']],
                             ['label' => 'Админка', 'options' => ['class' => 'header'],
                                 'visible' => Yii::$app->user->can('admin'),
@@ -93,7 +93,7 @@ AppAsset::register($this);
                 ?>
 
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>

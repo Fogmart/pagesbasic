@@ -65,7 +65,10 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
     {
         return [
             [['username'], 'required'],
+            [['email'], 'required'],
+            [['email'], 'unique'],
             [['username'], 'string', 'max' => 250],
+            [['email'], 'string', 'max' => 255],
             [['lname', 'fname', 'mname'], 'string', 'max' => 30],
             [['role'], 'string', 'max' => 50],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
@@ -445,7 +448,7 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
 
     public function getCommentatorName()
     {
-        return $this->name;
+        return $this->lname.' '.$this->fname.' '.$this->fname.', '.$this->role;
     }
 
     public function getCommentatorUrl()

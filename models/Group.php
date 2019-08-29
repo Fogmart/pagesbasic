@@ -86,9 +86,12 @@ class Group extends \yii\db\ActiveRecord
 
     public function getCatsCommentIds(){
         $res = [];
+
         foreach ($this->catids as $id){
+
             if ($id->can_comment) $res[] = $id->catid;
         }
+
         return $res;
     }
 

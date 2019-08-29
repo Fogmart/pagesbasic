@@ -31,7 +31,7 @@ class UserController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions'=>['usredt'],
+                        'actions'=>['usredt', 'home'],
                         'allow' => true,
                         'roles' => ['@'],
                     ]
@@ -160,13 +160,21 @@ class UserController extends Controller
 
         $model = Yii::$app->user->identity;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->save();
         }
 
         return $this->render('usredt', [
             'model' => $model,
         ]);
+    }
+
+    public function actionHome(){
+        if (Yii::$app->user->identity->homepage){
+            header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
+        } else {
+            header('Location: http://'.$_SERVER['HTTP_HOST']);
+        }
 
 
     }
