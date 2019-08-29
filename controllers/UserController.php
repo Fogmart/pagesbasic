@@ -173,8 +173,9 @@ class UserController extends Controller
         if (Yii::$app->user->identity->homepage){
             header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
         } else {
-            header('Location: http://'.$_SERVER['HTTP_HOST']);
+
         }
+        header('Location: http://'.$_SERVER['HTTP_HOST']);
 
 
     }
