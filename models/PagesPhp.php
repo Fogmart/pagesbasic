@@ -35,7 +35,7 @@ class PagesPhp extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
-            [['sort', 'whncrt', 'url', 'catid'], 'integer'],
+            [['sort', 'whncrt', 'url', 'catid','height', 'width'], 'integer'],
             [['title'], 'string', 'max' => 250],
             [['phpurl'], 'string', 'max' => 250],
         ];
@@ -55,6 +55,8 @@ class PagesPhp extends \yii\db\ActiveRecord
             'phpurl' => 'Ссылка на файл',
             'url' => 'ЧПУ',
             'catid' => 'Категория',
+            'height' => 'Высота',
+            'width' => 'Ширина',
         ];
     }
 

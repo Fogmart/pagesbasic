@@ -69,6 +69,7 @@ AppAsset::register($this);
                             ['label' => 'Админка', 'options' => ['class' => 'header'],
                                 'visible' => Yii::$app->user->can('admin'),
                                 'items'=>[
+                                        ['label' => 'Настройки', 'icon' => 'dashboard', 'url' => ['/options']],
                                         ['label' => 'Работа с PHP', 'icon' => 'dashboard', 'url' => ['/php'],
                                             'items'=>[['label' => 'Создать php', 'icon' => 'dashboard', 'url' => ['/php/create'],]
                                             ]

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-php-view">
 
-    <iframe src="<?=$model->fullPhpUrl?>" name="mainframe" width="100%" height="1000px"> </iframe>
+    <iframe src="<?=$model->fullPhpUrl?>" name="mainframe" width="<?=$model->width?>" height="<?=$model->height?>"> </iframe>
 
 
 </div>

@@ -75,6 +75,7 @@ $config = [
                 'page/<id:\d+>' => 'apage/view',
                 'page/create/<catid:\d+>' => 'page/create',
                 'php/<id:\d+>' => 'php/view',
+                'options' => 'options/update',
             ],
         ],
     ],

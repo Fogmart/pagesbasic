@@ -18,6 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phpurl')->textInput() ?>
 
+    <?= $form->field($model, 'width')->textInput() ?>
+    <?= $form->field($model, 'height')->textInput() ?>
+
 
     <?= $form->field($model, 'catid')->dropDownList(
         \yii\helpers\ArrayHelper::map(\app\models\CategoriesPhp::find()->all(), "id", "name"), ['prompt'=>'']
