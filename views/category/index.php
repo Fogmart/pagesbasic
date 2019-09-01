@@ -55,14 +55,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
         $.each($(".dd3-content"), function (i,e) {
             var id = $(this).closest('.dd-item').attr("data-id")
+            var h = $(this).html()
             $(this)
-                .append( '('+id+')')
+                .html("")
+                .append($("<span>").html(h))
                 .append(
-                $("<a>")
-                    .attr("href", "/category/update?id="+id)
-                    .html("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n")
-                    .css("margin-left", "50px")
-            )
+                    $("<span>").css("float","right")
+                        .append( '('+id+')')
+                        .append(
+                        $("<a>")
+                            .attr("href", "/category/update?id="+id)
+                            .html("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n")
+                            // .css("margin-left", "50px")
+                    )
+                )
 
         })
     })

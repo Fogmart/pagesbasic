@@ -74,15 +74,14 @@ class ApageController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $mayComment = false;
-        foreach (Yii::$app->user->identity->groups as $g){
-            foreach ($g->catsCommentIds as $cat){
-                $mayComment = $model->catid == $cat;
-                if ($mayComment) break;
+        $mayComment = Yii::$app->user->identity->canadmin;
+        if(!$mayComment)
+            foreach (Yii::$app->user->identity->groups as $g){
+                foreach ($g->catsCommentIds as $cat){
+                    $mayComment = $model->catid == $cat;
+                    if ($mayComment) break;
+                }
             }
-
-
-        }
 
         return $this->render('view', [
             'model' => $model,
