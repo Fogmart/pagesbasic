@@ -85,7 +85,7 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
     public function attributeLabels()
     {
         return [
-            'username' => 'Имя',
+            'username' => 'Логин',
             'groups_arr' => 'Группы',
             'canadmin' => 'Администратор',
             'lname' => 'Фамилия',
