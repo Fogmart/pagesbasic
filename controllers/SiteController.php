@@ -125,7 +125,8 @@ class SiteController extends Controller
 
     public function goHome()
     {
-        header('Location: http://'.$_SERVER['HTTP_HOST'].'/user/home');
+        header('Refresh: 0; URL=http://'.$_SERVER['SERVER_NAME'].'/user/home');
+//        header('Location: http://'.$_SERVER['HTTP_HOST'].'/user/home');
         return ;
     }
 

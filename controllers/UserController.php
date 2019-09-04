@@ -171,23 +171,22 @@ class UserController extends Controller
     }
 
     public function actionHome(){
-
+        $url = 'http://'.$_SERVER['SERVER_NAME'];
         if (Yii::$app->user->identity->homepage){
-            header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
-            return;
+            $url = 'http://'.$_SERVER['SERVER_NAME'].'/php/'.Yii::$app->user->identity->homepage;
         } else {
             $homeurl = Options::findOne(1)->homeurl;
-
             if ($homeurl) {
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/php/' . $homeurl);
-                return;
+                $url = 'http://'.$_SERVER['SERVER_NAME']. '/php/' . $homeurl;
             }
-
         }
-        header('Location: http://'.$_SERVER['HTTP_HOST']);
-
-
+        return $this->render('home', [
+            'url' => $url,
+        ]);
     }
+
+
+
 
 
 }
