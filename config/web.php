@@ -51,7 +51,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
                 'username' => 'aifogmart@yandex.ru',
-                'password' => '2vd44q',
+                'password' => '',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
