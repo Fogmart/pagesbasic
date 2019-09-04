@@ -86,19 +86,17 @@ class Group extends \yii\db\ActiveRecord
 
     public function getCatsCommentIds(){
         $res = [];
-
         foreach ($this->catids as $id){
-
             if ($id->can_comment) $res[] = $id->catid;
         }
-
         return $res;
     }
 
+    public function getUsersIds(){
+        return $this->hasMany(UserGroup::className(), ["group_id"=>"id"]);
+    }
 
-
-
-
-
-
+    public function getUsers(){
+        return $this->hasMany(User::className(), ["id"=>"user_id"])->via('usersIds');
+    }
 }

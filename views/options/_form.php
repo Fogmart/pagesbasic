@@ -14,6 +14,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'basecat')->textInput() ?>
 
+    <?= $form->field($model, 'homeurl')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\app\models\PagesPhp::find()->all(), "id", "title"),
+        ['prompt'=>'']
+
+    ) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Group;
+use app\models\Options;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -170,9 +171,17 @@ class UserController extends Controller
     }
 
     public function actionHome(){
+
         if (Yii::$app->user->identity->homepage){
             header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
+            return;
         } else {
+            $homeurl = Options::findOne(1)->homeurl;
+
+            if ($homeurl) {
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/php/' . $homeurl);
+                return;
+            }
 
         }
         header('Location: http://'.$_SERVER['HTTP_HOST']);

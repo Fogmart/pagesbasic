@@ -6,12 +6,12 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="user-form">
     <?php $form = ActiveForm::begin();?>
-    <div class="row">
+    <div class="row" style="margin-bottom: 30px">
         <div class="col-md-4">
             Имя пользователя: <b><?=$model->username?></b>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+            Email: <b><?=$model->email?></b>
         </div>
     </div>
     <div class="row">

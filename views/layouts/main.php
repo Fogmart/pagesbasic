@@ -60,7 +60,7 @@ AppAsset::register($this);
 
     <div class="container-fluid">
         <div class="row" style="padding-top: 5%">
-            <div class="col-md-2" >
+            <div class="col-md-1" style="width: 21%" >
                 <?php
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [
@@ -94,7 +94,7 @@ AppAsset::register($this);
                 ?>
 
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10" style="width: 75%">
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>

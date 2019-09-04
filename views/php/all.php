@@ -10,12 +10,12 @@ global $ucatIds;
 $ucatIds = $user->catphpIds;
 
 
+
 function renderlist($cat){
     global $ucatIds, $EditCats;
     if (in_array($cat->id, $ucatIds)) {
 
-    }
-        echo "<li>" . $cat->name;
+       echo "<li>" . $cat->name;
 
         if (isset($cat->child)) {
             echo "<ul>";
@@ -23,6 +23,7 @@ function renderlist($cat){
                 renderlist($ch);
             }
             echo "</ul>";
+        }
         if (isset($cat->pagesPhp)) {
             echo "<ul>";
             foreach ($cat->pagesPhp as $page) {

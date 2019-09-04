@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\CategoriesPhp */
 
-$this->title = 'Create Categories Php';
+$this->title = 'Добавление категории страниц';
 $this->params['breadcrumbs'][] = ['label' => 'Categories Phps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $("<a>")
                             .attr("href", "/category/update?id="+id)
                             .html("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n")
-                            // .css("margin-left", "50px")
+                            .css("margin-left", "20px")
                     )
                 )
 

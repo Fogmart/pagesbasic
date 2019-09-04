@@ -28,6 +28,7 @@ class Options extends \yii\db\ActiveRecord
         return [
             [['basecat'], 'required'],
             [['basecat'], 'integer'],
+            [['homeurl'], 'integer'],
         ];
     }
 
@@ -38,7 +39,8 @@ class Options extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'basecat' => 'ID rатегории по-умолчанию',
+            'basecat' => 'ID категории по-умолчанию',
+            'homeurl' => 'Домашняя страница по-умолчанию',
         ];
     }
 }

@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+
     'bootstrap' => ['log', 'comments'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -50,7 +51,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
                 'username' => 'aifogmart@yandex.ru',
-                'password' => '',
+                'password' => '2vd44q',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],

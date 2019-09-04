@@ -123,6 +123,12 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function goHome()
+    {
+        header('Location: http://'.$_SERVER['HTTP_HOST'].'/user/home');
+        return ;
+    }
+
     /**
      * Displays contact page.
      *
@@ -165,7 +171,7 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            Yii::$app->session->setFlash('success', 'Спасибо за регистрацию. Пожалуйста, подтвердите email.');
             return $this->goHome();
         }
 

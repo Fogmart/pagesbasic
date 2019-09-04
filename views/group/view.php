@@ -10,6 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Группы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$users = $model->users;
 ?>
 <div class="group-view">
 
@@ -22,5 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
         ],
     ]) ?>
+
+    <?php if ($users) {?>
+        <h2>Участники</h2>
+        <ol>
+        <?php foreach ($users as $one) {?>
+            <li><?=$one->username?>, <?=$one->commentatorName?></li>
+
+        <?php }?>
+        </ol>
+    <?php }?>
 
 </div>
