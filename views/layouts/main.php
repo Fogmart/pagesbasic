@@ -60,7 +60,7 @@ AppAsset::register($this);
 
     <div class="container-fluid">
         <div class="row" style="padding-top: 70px">
-            <div class="col-md-1" style="width: 251px" >
+            <div class="col-md-1" style="width: 260px" >
                 <?php
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [

@@ -86,7 +86,7 @@ class ApageController extends Controller
         if(!$mayComment)
             foreach (Yii::$app->user->identity->groups as $g){
                 foreach ($g->catsReadIds as $cat){
-                    $mayComment = $model->catid == $cat;
+                    $mayView = $model->catid == $cat;
                     if ($mayView) break;
                 }
 
