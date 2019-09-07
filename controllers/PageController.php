@@ -35,8 +35,6 @@ class  PageController extends Controller
         if (!$mayEdit) throw new ForbiddenHttpException('У вас нет прав на добавление в эту категорию.');
 
 
-        print_r(Yii::$app->request->post());
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('/page/'.$model->id);
         }
