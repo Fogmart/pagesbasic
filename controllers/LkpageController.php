@@ -2,25 +2,18 @@
 
 namespace app\controllers;
 
-use app\models\Category;
-use app\models\Group;
-use app\models\ImageManager;
-use app\models\PageGroup;
 use Yii;
-use app\models\Page;
-use app\models\PageSearch;
-use yii\db\Exception;
+use app\models\PagesLk;
+use app\models\PagesLkSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\HttpException;
-use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PageController implements the CRUD actions for Page model.
+ * LkpageController implements the CRUD actions for PagesLk model.
  */
-class ApageController extends Controller
+class LkpageController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,10 +25,9 @@ class ApageController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index','create','update', 'delete','view', 'assigngroup','edtcat'],
+                        'actions'=>['index','create','update', 'delete', 'view'],
                         'allow' => true,
-//                        'roles' => ['admin'],
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ]
                 ]
             ],
@@ -43,21 +35,18 @@ class ApageController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                    'delete-image'=> ['POST'],
-                    'sort-image'=> ['POST'],
-
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Page models.
+     * Lists all PagesLk models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PageSearch();
+        $searchModel = new PagesLkSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,49 +55,27 @@ class ApageController extends Controller
         ]);
     }
 
-
     /**
-     * Displays a single Page model.
+     * Displays a single PagesLk model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        $mayComment = Yii::$app->user->identity->canadmin;
-        $mayView = Yii::$app->user->identity->canadmin;
-        if(!$mayComment)
-            foreach (Yii::$app->user->identity->groups as $g){
-                foreach ($g->catsReadIds as $cat){
-                    $mayComment = $model->catid == $cat;
-                    if ($mayView) break;
-                }
-
-                foreach ($g->catsCommentIds as $cat){
-                    $mayComment = $model->catid == $cat;
-                    if ($mayComment) break;
-                }
-            }
-
-        if (!$mayView) throw new HttpException('У вас нет прав на просмотр этого текста');
-
         return $this->render('view', [
-            'model' => $model,
-            'mayComment' => $mayComment
+            'model' => $this->findModel($id),
         ]);
-
     }
 
     /**
-     * Creates a new Page model.
+     * Creates a new PagesLk model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Page();
-        $model->catid = Category::defCat()->id;
+        $model = new PagesLk();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -120,7 +87,7 @@ class ApageController extends Controller
     }
 
     /**
-     * Updates an existing Page model.
+     * Updates an existing PagesLk model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -140,7 +107,7 @@ class ApageController extends Controller
     }
 
     /**
-     * Deletes an existing Page model.
+     * Deletes an existing PagesLk model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -154,30 +121,18 @@ class ApageController extends Controller
     }
 
     /**
-     * Finds the Page model based on its primary key value.
+     * Finds the PagesLk model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Page the loaded model
+     * @return PagesLk the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (
-            ($model = Page::findOne($id)) !== null) {
+        if (($model = PagesLk::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    public function actionEdtcat($catid){
-        $pagelst = Page::byCategory($catid);
-
-        return $this->render('edtcat.php', [
-            'pagelst' => $pagelst,
-        ]);
-
-    }
-
-
 }

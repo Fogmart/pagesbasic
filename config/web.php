@@ -49,8 +49,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
-                'username' => 'aifogmart@yandex.ru',
-                'password' => '',
+                'username' => 'a4dmin-pages@yandex.ru',
+                'password' => 'flvbygfutc',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
@@ -76,6 +76,7 @@ $config = [
                 'page/create/<catid:\d+>' => 'page/create',
                 'php/<id:\d+>' => 'php/view',
                 'options' => 'options/update',
+                'lk' => 'user/home',
             ],
         ],
     ],

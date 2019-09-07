@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Group;
 use app\models\Options;
+use app\models\PagesPhp;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -35,7 +36,7 @@ class UserController extends Controller
                         'actions'=>['usredt', 'home'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ]
+                    ],
                 ]
             ],
             'verbs' => [
@@ -171,18 +172,15 @@ class UserController extends Controller
     }
 
     public function actionHome(){
-        $url = 'http://'.$_SERVER['SERVER_NAME'];
-        if (Yii::$app->user->identity->homepage){
-            $url = 'http://'.$_SERVER['SERVER_NAME'].'/php/'.Yii::$app->user->identity->homepage;
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->render('home', [
+                'model' => Yii::$app->user->identity,
+            ]);
         } else {
-            $homeurl = Options::findOne(1)->homeurl;
-            if ($homeurl) {
-                $url = 'http://'.$_SERVER['SERVER_NAME']. '/php/' . $homeurl;
-            }
+
         }
-        return $this->render('home', [
-            'url' => $url,
-        ]);
+
     }
 
 

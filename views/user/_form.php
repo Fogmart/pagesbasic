@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'homepageid')->dropDownList(
-        \yii\helpers\ArrayHelper::map(\app\models\PagesPhp::find()->all(), "id", "title"), ['prompt'=>'']
+        \yii\helpers\ArrayHelper::map(\app\models\PagesLk::find()->all(), "id", "title"), ['prompt'=>'']
     ) ?>
 
 

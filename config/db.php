@@ -7,9 +7,13 @@ return [
     'password' => 'secret',
     'charset' => 'utf8',
 
+//    'class' => 'yii\db\Connection',
 //    'dsn' => 'mysql:host=localhost;dbname=pantelfz_php003',
 //    'username' => 'pantelfz_php003',
 //    'password' => 'T8whBn*Z',
+//    'charset' => 'utf8',
+
+
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,

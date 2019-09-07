@@ -59,12 +59,12 @@ AppAsset::register($this);
     ?>
 
     <div class="container-fluid">
-        <div class="row" style="padding-top: 5%">
-            <div class="col-md-1" style="width: 21%" >
+        <div class="row" style="padding-top: 70px">
+            <div class="col-md-1" style="width: 251px" >
                 <?php
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [
-                            ['label' => 'Личный кабинет', 'icon' => 'dashboard', 'url' => ['/user/home']],
+                            ['label' => 'Личный кабинет', 'icon' => 'dashboard', 'url' => ['/lk']],
                             ['label' => 'Мой настройки', 'icon' => 'dashboard', 'url' => ['/user/usredt']],
                             ['label' => 'Админка', 'options' => ['class' => 'header'],
                                 'visible' => Yii::$app->user->can('admin'),
@@ -79,6 +79,7 @@ AppAsset::register($this);
                                             ]
                                         ],
                                         ['label' => 'Пользователи', 'icon' => 'dashboard', 'url' => ['/user']],
+                                        ['label' => 'Личные страницы', 'icon' => 'dashboard', 'url' => ['/lkpage']],
                                         ['label' => 'Категории статей', 'icon' => 'dashboard', 'url' => ['/category']],
                                         ['label' => 'Категории страниц', 'icon' => 'dashboard', 'url' => ['/catphp']],
                                         ['label' => 'Группы пользователей', 'icon' => 'dashboard', 'url' => ['/group']],

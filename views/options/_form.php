@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'basecat')->textInput() ?>
 
     <?= $form->field($model, 'homeurl')->dropDownList(
-        \yii\helpers\ArrayHelper::map(\app\models\PagesPhp::find()->all(), "id", "title"),
+        \yii\helpers\ArrayHelper::map(\app\models\PagesLk::find()->all(), "id", "title"),
         ['prompt'=>'']
 
     ) ?>

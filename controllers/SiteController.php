@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Options;
 use app\models\Page;
 use app\models\PagesPhp;
 use app\models\ResendVerificationEmailForm;
@@ -96,10 +97,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (isset(Yii::$app->user->identity->homepage)){
-                header('Location: http://'.$_SERVER['HTTP_HOST'].'/php/'.Yii::$app->user->identity->homepage);
-                return;
-            }
+            $this->redirect("/lk");
+            return;
 
             return $this->goBack();
         } else {
@@ -123,12 +122,6 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function goHome()
-    {
-        header('Refresh: 0; URL=http://'.$_SERVER['SERVER_NAME'].'/user/home');
-//        header('Location: http://'.$_SERVER['HTTP_HOST'].'/user/home');
-        return ;
-    }
 
     /**
      * Displays contact page.
@@ -173,7 +166,8 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Спасибо за регистрацию. Пожалуйста, подтвердите email.');
-            return $this->goHome();
+            $this->redirect("/lk");
+            return;
         }
 
         return $this->render('signup', [
