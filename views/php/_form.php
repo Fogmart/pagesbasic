@@ -18,8 +18,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phpurl')->textInput() ?>
 
-    <?= $form->field($model, 'width')->textInput() ?>
-    <?= $form->field($model, 'height')->textInput() ?>
+    <div class="row">
+        <div class="col-md-6"><?= $form->field($model, 'min_width')->textInput() ?></div>
+        <div class="col-md-6"><?= $form->field($model, 'width')->textInput() ?></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6"><?= $form->field($model, 'min_height')->textInput() ?></div>
+        <div class="col-md-6"><?= $form->field($model, 'height')->textInput() ?></div>
+    </div>
+
+
+
 
 
     <?= $form->field($model, 'catid')->dropDownList(

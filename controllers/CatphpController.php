@@ -7,6 +7,7 @@ use app\models\Group_CatPhp;
 use Yii;
 use app\models\CategoriesPhp;
 use app\models\CategoriesPhpSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,6 +23,7 @@ class CatphpController extends Controller
 
     public function actions() {
         return [
+
             'nodeMove' => [
                 'class' => 'app\actions\CatMoveAction',
                 'modelName' => CategoriesPhp::className(),
@@ -32,6 +34,17 @@ class CatphpController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

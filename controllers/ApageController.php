@@ -12,7 +12,7 @@ use app\models\PageSearch;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\HttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,11 +32,16 @@ class ApageController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index','create','update', 'delete','view', 'assigngroup','edtcat'],
+                        'actions'=>['update', 'view', 'edtcat'],
                         'allow' => true,
-//                        'roles' => ['admin'],
                         'roles' => ['@'],
-                    ]
+                    ],
+                    [
+                        'actions'=>['index', 'delete', 'assigngroup','edtcat', 'create'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+
                 ]
             ],
             'verbs' => [
@@ -91,7 +96,7 @@ class ApageController extends Controller
                 }
             }
 
-        if (!$mayView) throw new HttpException('У вас нет прав на просмотр этого текста');
+        if (!$mayView) throw new ForbiddenHttpException('У вас нет прав на просмотр этой страницы.');
 
         return $this->render('view', [
             'model' => $model,

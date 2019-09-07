@@ -9,6 +9,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -22,6 +23,16 @@ class  PageController extends Controller
     {
         $model = new Page();
         $model->catid = $catid;
+
+        $mayEdit = Yii::$app->user->identity->canadmin;
+        if(!$mayEdit)
+            foreach (Yii::$app->user->identity->groups as $g){
+                foreach ($g->catsEditIds as $cat){
+                    $mayEdit = $model->catid == $cat;
+                    if ($mayEdit) break;
+                }
+            }
+        if (!$mayEdit) throw new ForbiddenHttpException('У вас нет прав на добавление в эту категорию.');
 
 
         print_r(Yii::$app->request->post());
@@ -38,6 +49,16 @@ class  PageController extends Controller
     public function actionUpdate($id)
     {
         $model = Page::find()->andWhere(['id'=>$id])->one();
+
+        $mayEdit = Yii::$app->user->identity->canadmin;
+        if(!$mayEdit)
+            foreach (Yii::$app->user->identity->groups as $g){
+                foreach ($g->catsEditIds as $cat){
+                    $mayEdit = $model->catid == $cat;
+                    if ($mayEdit) break;
+                }
+            }
+        if (!$mayEdit) throw new ForbiddenHttpException('У вас нет прав на редактирвоание этой страницы.');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('/page/'.$model->id);

@@ -7,7 +7,9 @@ use app\models\Category;
 use Yii;
 use app\models\PagesPhp;
 use app\models\PagesPhpSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -22,6 +24,22 @@ class PhpController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions'=>['create','update', 'view', 'edtcat', 'delete', 'index'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions'=>['view', 'allphp'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -54,8 +72,19 @@ class PhpController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $mayread = Yii::$app->user->identity->canadmin;
+        if(!$mayread)
+            foreach (Yii::$app->user->identity->groups as $g){
+                foreach ($g->catsPhpReadIds as $cat){
+                    $mayComment = $model->catid == $cat;
+                    if ($mayread) break;
+                }
+            }
+        if (!$mayread) throw new ForbiddenHttpException('У вас нет прав на просмотр этой страницы.');
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

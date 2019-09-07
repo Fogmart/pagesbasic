@@ -76,7 +76,7 @@ $config = [
                 'page/create/<catid:\d+>' => 'page/create',
                 'php/<id:\d+>' => 'php/view',
                 'options' => 'options/update',
-                'lk' => 'user/home',
+                'home' => 'user/home',
             ],
         ],
     ],

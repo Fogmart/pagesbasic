@@ -97,7 +97,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $this->redirect("/lk");
+            $this->redirect("/home");
             return;
 
             return $this->goBack();
@@ -166,7 +166,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Спасибо за регистрацию. Пожалуйста, подтвердите email.');
-            $this->redirect("/lk");
+            $this->redirect("/home");
             return;
         }
 

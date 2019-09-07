@@ -64,7 +64,7 @@ AppAsset::register($this);
                 <?php
                 if (!Yii::$app->user->isGuest) {
                     $menuItems =  [
-                            ['label' => 'Личный кабинет', 'icon' => 'dashboard', 'url' => ['/lk']],
+                            ['label' => 'Личный кабинет', 'icon' => 'dashboard', 'url' => ['/home']],
                             ['label' => 'Мой настройки', 'icon' => 'dashboard', 'url' => ['/user/usredt']],
                             ['label' => 'Админка', 'options' => ['class' => 'header'],
                                 'visible' => Yii::$app->user->can('admin'),
