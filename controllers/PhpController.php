@@ -76,8 +76,8 @@ class PhpController extends Controller
         $mayread = Yii::$app->user->identity->canadmin;
         if(!$mayread)
             foreach (Yii::$app->user->identity->groups as $g){
-                foreach ($g->catsPhpReadIds as $cat){
-                    $mayComment = $model->catid == $cat;
+                foreach ($g->catphpReadIds as $cat){
+                    $mayread = $model->catid == $cat;
                     if ($mayread) break;
                 }
             }
