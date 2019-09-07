@@ -38,7 +38,7 @@ class CatphpController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'actions'=>['index', 'delete','create','update', 'view', 'assigngroup'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
