@@ -41,7 +41,7 @@ class CategoryController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'actions'=>['index', 'delete','create','update', 'view', 'assign'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
