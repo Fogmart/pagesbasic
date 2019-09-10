@@ -19,6 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="col-md-11">
         <p><?= $model->text ?></p>
+
+        <?php if ($mayComment) {?>
+            <div style="border-top: solid;margin-top: 85px;">
+                <?= Comments\widgets\CommentListWidget::widget([
+                    'entity' => (string) 'page'.$model->id,
+                ]);?>
+            </div>
+        <?php }?>
+
     </div>
     <div class="col-md-1">
         <?= \yii\bootstrap\Html::a('Изменить',
@@ -29,10 +38,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?php if ($mayComment) {?>
-    <div style="border-top: solid;margin-top: 85px;">
-        <?= Comments\widgets\CommentListWidget::widget([
-            'entity' => (string) 'page'.$model->id,
-        ]);?>
-    </div>
-<?php }?>

@@ -240,12 +240,13 @@ class SiteController extends Controller
         }
         if ($user = $model->verifyEmail()) {
             if (Yii::$app->user->login($user)) {
-                Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
-                return $this->goHome();
+                Yii::$app->session->setFlash('success', 'Ваш email подтвержден!');
+                $this->redirect("/home");
+                return;
             }
         }
 
-        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
+        Yii::$app->session->setFlash('error', 'Не удалось подтверить email.');
         return $this->goHome();
     }
 
