@@ -448,7 +448,7 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
 
     public function getCommentatorName()
     {
-        return $this->lname.' '.$this->fname.' '.$this->fname.', '.$this->role;
+        return $this->lname.' '.$this->fname.' '.$this->mname.', '.$this->role;
     }
 
     public function getCommentatorUrl()
@@ -463,7 +463,7 @@ class User extends ActiveRecord implements IdentityInterface, CommentatorInterfa
 
     public function getHomePageUrl(){
         $hpid = ($this->homepageid)? $this->homepageid : Options::findOne(1)->homeurl;
-        return PagesLk::findOne($hpid)->url;
+        return PagesLk::findOne($hpid)->url."?id=".$this->id;
     }
 
 }
