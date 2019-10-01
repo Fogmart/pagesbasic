@@ -10,6 +10,11 @@ use yii\widgets\Pjax;
 $this->title = 'Тексты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .deleted{
+        background: #b21f2d !important;
+    }
+</style>
 <div class="page-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -36,6 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            if ($model->deleted == 1) return ['class'=>'deleted'];
+            return [];
+        }
     ]); ?>
 
     <?php Pjax::end(); ?>

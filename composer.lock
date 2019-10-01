@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "290d9a0154a90500b5af9de827b1c8b3",
+    "content-hash": "bf04a9d59d785af5c6f7b8f765918e4c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -711,6 +711,39 @@
                 "yii2"
             ],
             "time": "2016-10-08T12:21:47+00:00"
+        },
+        {
+            "name": "somesh/php-query",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slaith/phpQuery.git",
+                "reference": "91519876bb56ddc453a05be05d61c1a9489864c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slaith/phpQuery/zipball/91519876bb56ddc453a05be05d61c1a9489864c8",
+                "reference": "91519876bb56ddc453a05be05d61c1a9489864c8",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "phpQuery/phpQuery.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "somesh",
+                    "email": "mail@somesh.io"
+                }
+            ],
+            "description": "A composer wrapper for the phpQuery package",
+            "time": "2018-04-19T11:48:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

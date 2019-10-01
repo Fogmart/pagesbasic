@@ -21,7 +21,8 @@
         "rmrevin/yii2-comments": "~1.4",
         "vova07/yii2-imperavi-widget": "*",
         "kartik-v/yii2-widget-select2": "@dev",
-        "slatiusa/yii2-nestable": "dev-master"
+        "slatiusa/yii2-nestable": "dev-master",
+        "somesh/php-query": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

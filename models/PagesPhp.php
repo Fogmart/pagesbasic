@@ -64,6 +64,6 @@ class PagesPhp extends \yii\db\ActiveRecord
     }
 
     public function getFullPhpUrl(){
-        return \yii\helpers\Url::home(true).$this->phpurl."?id=".Yii::$app->user->identity->id;
+        return \yii\helpers\Url::home(true).$this->phpurl."?id=".Yii::$app->user->identity->id."&notAtRivialVaRibLe=123ggrdpuNNheHH7ylzNhUkd90JbsJik";
     }
 }

@@ -16,7 +16,7 @@ use vova07\imperavi\Widget;
     <?php $form = ActiveForm::begin([
             'options' => ['enctype'=>'multipart/form-data']
         ]); ?>
-
+    <?= $form->field($model, 'deleted')->hiddenInput(['value'=>0]) ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
 
@@ -34,7 +34,10 @@ use vova07\imperavi\Widget;
                     ['green', '<span class="label-green">green</span>'],
                     ['blue', '<span class="label-blue">blue</span>'],
                 ],
-                'imageUpload' => \yii\helpers\Url::to(['/site/save-redactor-image', 'sub' => 'page']),
+                'imageUpload' => \yii\helpers\Url::to(['/default/image-upload']),
+                'plugins' => [
+                    'imagemanager',
+                ],
             ],
         ]);
         ?>

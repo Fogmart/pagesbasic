@@ -17,6 +17,7 @@ use kartik\select2\Select2;
         ]); ?>
 
 
+    <?= $form->field($model, 'deleted')->hiddenInput() ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'text')->widget(Widget::className(), [
         'settings' => [
@@ -32,7 +33,10 @@ use kartik\select2\Select2;
                 ['green', '<span class="label-green">green</span>'],
                 ['blue', '<span class="label-blue">blue</span>'],
             ],
-            'imageUpload' => \yii\helpers\Url::to(['/site/save-redactor-image', 'sub' => 'page']),
+            'imageUpload' => \yii\helpers\Url::to(['/default/image-upload']),
+            'plugins' => [
+                'imagemanager',
+            ],
         ],
     ]);
     ?>

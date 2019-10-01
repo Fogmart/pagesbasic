@@ -11,6 +11,7 @@ use app\models\Page;
 use app\models\PageSearch;
 use yii\db\Exception;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\MethodNotAllowedHttpException;
@@ -153,7 +154,7 @@ class ApageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->setDel();
 
         return $this->redirect(['index']);
     }

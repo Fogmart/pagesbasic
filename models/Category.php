@@ -76,7 +76,8 @@ class Category extends \yii\db\ActiveRecord
 
 
     public function getPages(){
-        return $this->hasMany(Page::className(), ['catid'=>'id']);
+        return $this->hasMany(Page::className(), ['catid'=>'id'])
+            ->where('deleted = 0');
     }
 
     public function getPagesPhp(){
