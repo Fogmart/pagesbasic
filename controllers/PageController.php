@@ -67,6 +67,12 @@ class  PageController extends Controller
         ]);
     }
 
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->setDel();
+        return $this->actionAlltext();
+    }
+
     public function actionOne($url,$groupid)
     {
         if ($page = Page::find()->andWhere(['url'=>$url])->one()){
@@ -92,6 +98,15 @@ class  PageController extends Controller
         return $this->render('all', ['cats'=>$cats, 'types'=>$types]);
     }
 
+    protected function findModel($id)
+    {
+        if (
+            ($model = Page::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 
 
 

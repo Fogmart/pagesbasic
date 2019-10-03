@@ -13,7 +13,10 @@ use kartik\select2\Select2;
 <div class="page-form">
 
     <?php $form = ActiveForm::begin([
-            'options' => ['enctype'=>'multipart/form-data']
+            'options' => [
+                        'enctype'=>'multipart/form-data',
+                        'id'=>"frm"
+            ]
         ]); ?>
 
 
@@ -44,7 +47,20 @@ use kartik\select2\Select2;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+
+        <?php if ($model->id)
+            echo Html::button('Удалить',
+                [
+                    'class' => 'btn btn-danger',
+                    'onClick'=>"(function (  ) { 
+                            if (confirm('Удалить запись?')){
+                                $('#frm').attr('action', '/page/delete?id=".$model->id."');
+                                $('#frm').submit();
+                            }
+                            })();"
+                ]) ?>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 
