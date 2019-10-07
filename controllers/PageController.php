@@ -22,20 +22,22 @@ class  PageController extends Controller
     public function actionCreate($catid)
     {
         $model = new Page();
-        $model->catid = $catid;
 
         $mayEdit = Yii::$app->user->identity->canadmin;
         if(!$mayEdit)
             foreach (Yii::$app->user->identity->groups as $g){
                 foreach ($g->catsEditIds as $cat){
-                    $mayEdit = $model->catid == $cat;
+                    $mayEdit = $catid == $cat;
                     if ($mayEdit) break;
                 }
             }
         if (!$mayEdit) throw new ForbiddenHttpException('У вас нет прав на добавление в эту категорию.');
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->catid = $catid;
+            $model->deleted = 0;
+            $model->save();
             return $this->redirect('/page/'.$model->id);
         }
 
